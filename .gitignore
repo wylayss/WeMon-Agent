@@ -4,6 +4,11 @@ wemon-agent-linux-amd64
 wemon-agent-linux-arm64
 wemon-agent-*.tar.gz
 wemon-agent-*.zip
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
 
 # Local configuration containing sensitive tokens
 config.json
