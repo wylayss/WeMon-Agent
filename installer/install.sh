@@ -70,16 +70,21 @@ fi
 
 echo -e "${BLUE}⚙️ Installing WeMon Monitoring Agent...${NC}"
 
-# 1. Detect architecture and set download URL
+# 1. Detect latest release tag dynamically (to support pre-releases like v1.0.0-prototype)
+TAG=$(curl -s https://api.github.com/repos/wylayss/WeMon-Agent/releases | grep -m 1 '"tag_name":' | cut -d '"' -f 4 || true)
+if [ -z "$TAG" ]; then
+    TAG="v1.0.0-prototype"
+fi
+
 ARCH=$(uname -m)
 BINARY_URL=""
 
 if [ "$ARCH" = "x86_64" ]; then
     echo -e "   Detected Architecture: ${BOLD_WHITE}x86_64${NC}"
-    BINARY_URL="https://github.com/wylayss/WeMon-Agent/releases/latest/download/wemon-agent-linux-amd64"
+    BINARY_URL="https://github.com/wylayss/WeMon-Agent/releases/download/${TAG}/wemon-agent-linux-amd64"
 elif [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
     echo -e "   Detected Architecture: ${BOLD_WHITE}ARM64${NC}"
-    BINARY_URL="https://github.com/wylayss/WeMon-Agent/releases/latest/download/wemon-agent-linux-arm64"
+    BINARY_URL="https://github.com/wylayss/WeMon-Agent/releases/download/${TAG}/wemon-agent-linux-arm64"
 else
     echo -e "${RED}❌ Unsupported architecture: $ARCH. WeMon-Agent only supports x86_64 and ARM64.${NC}"
     exit 1
