@@ -90,6 +90,12 @@ else
     exit 1
 fi
 
+# Check if WeMon Agent is already installed and active/enabled
+if systemctl is-active --quiet wemon-agent 2>/dev/null || systemctl is-enabled --quiet wemon-agent 2>/dev/null; then
+    echo -e "${YELLOW}⚠️ Existing WeMon Agent service detected. Stopping service to replace binary...${NC}"
+    systemctl stop wemon-agent || true
+fi
+
 # 2. Download pre-compiled binary
 echo -e "📥 Downloading agent binary..."
 echo -e "   URL: ${BOLD_WHITE}$BINARY_URL${NC}"
