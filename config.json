@@ -1,0 +1,6 @@
+{
+  "server_url": "https://wemon.werix.net",
+  "node_token": "wmn_tok_dummy12345",
+  "interval_seconds": 2,
+  "insecure_skip_verify": true
+}
