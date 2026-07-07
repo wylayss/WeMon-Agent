@@ -100,7 +100,7 @@ fi
 echo -e "📥 Downloading agent binary..."
 echo -e "   URL: ${BOLD_WHITE}$BINARY_URL${NC}"
 # Fallback to local build binary if downloading fails (useful for local development install tests)
-if ! curl -sL -f -o "$BINARY_PATH" "$BINARY_URL"; then
+if ! curl -L -f -o "$BINARY_PATH" "$BINARY_URL"; then
     echo -e "${YELLOW}⚠️ Failed to download binary from GitHub. Checking for local build binary...${NC}"
     if [ -f "./wemon-agent" ]; then
         echo -e "   Found local build binary. Copying to $BINARY_PATH..."
