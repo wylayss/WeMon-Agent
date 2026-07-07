@@ -92,6 +92,7 @@ fi
 
 # 2. Download pre-compiled binary
 echo -e "📥 Downloading agent binary..."
+echo -e "   URL: ${BOLD_WHITE}$BINARY_URL${NC}"
 # Fallback to local build binary if downloading fails (useful for local development install tests)
 if ! curl -sL -f -o "$BINARY_PATH" "$BINARY_URL"; then
     echo -e "${YELLOW}⚠️ Failed to download binary from GitHub. Checking for local build binary...${NC}"
